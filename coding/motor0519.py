@@ -21,16 +21,47 @@ def motor(speed, i):
     elif speed < -100:
         sped = -100
     if speed == 0:
-        pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
         pca.channels[brk_channel+4*i].duty_cycle = int(0xffff)
-    elif speed > 0:
         pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
+    elif speed > 0:
         pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
+        pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
         pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
     else:
-        pca.channels[dir_channel+4*i].duty_cycle = int(0x0000)
         pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
+        pca.channels[dir_channel+4*i].duty_cycle = int(0x0000)
         pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
+
+def forward(speed):
+    motor(speed,0)
+    motor(speed,1)
+    motor(speed,2)
+    motor(speed,3)
+def backward(speed):
+    motor(-speed,0)
+    motor(-speed,1)
+    motor(-speed,2)
+    motor(-speed,3)
+def right(speed):
+    motor(speed,0)
+    motor(-speed,1)
+    motor(-speed,2)
+    motor(speed,3)
+def left(speed):
+    motor(-speed,0)
+    motor(speed,1)
+    motor(speed,2)
+    motor(-speed,3)
+def cw(speed):
+    motor(speed,0)
+    motor(-speed,1)
+    motor(speed,2)
+    motor(-speed,3)
+def ccw(speed):
+    motor(-speed,0)
+    motor(speed,1)
+    motor(-speed,2)
+    motor(speed,3)
 
 print("Fowards slow")
 motor(50,0)
