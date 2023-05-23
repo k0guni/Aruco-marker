@@ -1,3 +1,7 @@
+#2023-05-23
+#Tech University of Korea
+#Mechatronics Engineering 2018130002 Ko Geon Hui
+
 import time
 import RPi.GPIO as GPIO
 
@@ -41,7 +45,7 @@ class Sensor():
             Sensor(16,15),
             Sensor(31,32)         
         ]
-            
+
         while True:
             distances = [sensor.getdistance() for sensor in sensors]
             print(" | ".join("{:.0f}cm".format(distance) for distance in distances))

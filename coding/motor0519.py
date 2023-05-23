@@ -1,3 +1,9 @@
+#2023-05-23
+#Tech University of Korea
+#Mechatronics Engineering 2018130002 Ko Geon Hui
+#adafruit_pca9685 library download
+#https://www.google.com/search?q=adafruit_pca9685&oq=adafruit_pca9685&aqs=edge..69i57j0i19i30l7.1374j0j4&sourceid=chrome&ie=UTF-8
+
 import time
 import busio
 
@@ -13,24 +19,36 @@ pwm_channel = 0
 dir_channel = 1
 brk_channel = 2
 
-
 def motor(speed, i):
 
     if speed > 100:
         speed = 100
     elif speed < -100:
         sped = -100
-    if speed == 0:
-        pca.channels[brk_channel+4*i].duty_cycle = int(0xffff)
-        pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
-    elif speed > 0:
-        pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
-        pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
-        pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
-    else:
-        pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
-        pca.channels[dir_channel+4*i].duty_cycle = int(0x0000)
-        pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
+    if i == 0 and i == 1:
+        if speed == 0:
+            pca.channels[brk_channel+4*i].duty_cycle = int(0xffff)
+            pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
+        elif speed > 0:
+            pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
+            pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
+            pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
+        else:
+            pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
+            pca.channels[dir_channel+4*i].duty_cycle = int(0x0000)
+            pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
+    elif i == 2 and i == 3:
+        if speed == 0:
+            pca.channels[brk_channel+4*i].duty_cycle = int(0xffff)
+            pca.channels[dir_channel+4*i].duty_cycle = int(0x0000)
+        elif speed > 0:
+            pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
+            pca.channels[dir_channel+4*i].duty_cycle = int(0x0000)
+            pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))
+        else:
+            pca.channels[brk_channel+4*i].duty_cycle = int(0x0000)
+            pca.channels[dir_channel+4*i].duty_cycle = int(0xffff)
+            pca.channels[pwm_channel+4*i].duty_cycle = int((speed/100) * (0xffff/100))        
 
 def forward(speed):
     motor(speed,0)
